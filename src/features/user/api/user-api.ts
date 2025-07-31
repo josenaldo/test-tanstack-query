@@ -10,6 +10,9 @@ const USER_API_URL = '/users';
 
 async function getUser(id: string) {
   try{
+
+    if (!id) return null;
+
     const url = `${USER_API_URL}/${id}`;
 
     const response  = await api.get<User>(url);

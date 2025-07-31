@@ -1,6 +1,8 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import '@mantine/core/styles.css';
+import {ColorSchemeScript, createTheme, MantineProvider} from '@mantine/core';
+
 import App from './App.tsx'
 
 import {
@@ -10,10 +12,17 @@ import {
 
 const queryClient = new QueryClient()
 
+const theme = createTheme({
+  primaryColor: 'cyan',
+});
+
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </StrictMode>,
+    <StrictMode>
+      <ColorSchemeScript defaultColorScheme="dark" />
+      <MantineProvider theme={theme} defaultColorScheme="dark" forceColorScheme='dark'>
+        <QueryClientProvider client={queryClient}>
+          <App/>
+        </QueryClientProvider>
+      </MantineProvider>
+    </StrictMode>
 )
